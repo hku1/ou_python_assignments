@@ -1,0 +1,153 @@
+[
+{
+	"code": "IB0402",
+	"naam": "Logica, verzamelingen en relaties",
+	"startdatum": "", 
+	"einddatum": "", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102"],
+	"tentamens": ["2022-01-31", "2022-04-19", "2022-07-05"]
+},
+{
+	"code": "IB0602",
+	"naam": "Lineaire algebra",
+	"startdatum": "", 
+	"einddatum": "", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102"],
+	"tentamens": ["2021-11-15", "2022-02-01", "2022-07-06"]
+},
+{
+	"code": "IB0702",
+	"naam": "Computernetwerken",
+	"startdatum": "", 
+	"einddatum": "", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102"],
+	"tentamens": ["2022-02-03", "2022-04-20", "2022-07-06"]
+},
+{
+	"code": "IB0802",
+	"naam": "Formele talen en automaten",
+	"startdatum": "", 
+	"einddatum": "", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102", "IB1102"],
+	"tentamens": ["2021-11-09", "2022-02-03", "2022-07-04"]
+},
+{
+	"code": "IB0102",
+	"naam": "Inleiding Informatica",
+	"startdatum": "2021-09-01", 
+	"einddatum": "2021-11-05", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": [],
+	"tentamens": ["2021-11-08", "2022-02-01", "2022-07-07"]
+},
+{
+	"code": "IB0102",
+	"naam": "Inleiding Informatica",
+	"startdatum": "2022-02-07", 
+	"einddatum": "2022-04-15", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": [],
+	"tentamens": ["2022-04-20", "2022-07-07"]
+},
+{
+	"code": "IB1102",
+	"naam": "Objectgeorienteerd programmeren",
+	"startdatum": "2021-09-01", 
+	"einddatum": "2021-11-05", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102"],
+	"tentamens": ["2021-11-10", "2022-02-02", "2022-07-04"]
+},
+{
+	"code": "IB0202",
+	"naam": "Inleiding informatiekunde",
+	"startdatum": "2021-11-15", 
+	"einddatum": "2022-01-28", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": [],
+	"tentamens": ["2022-02-02", "2022-04-25", "2022-08-24"]
+},
+{
+	"code": "IB0202",
+	"naam": "Inleiding informatiekunde",
+	"startdatum": "2022-04-25", 
+	"einddatum": "2022-07-01", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": [],
+	"tentamens": ["2022-07-05"]
+},
+{
+	"code": "IB1002",
+	"naam": "Objectgeorienteerd analyseren en ontwerpen",
+	"startdatum": "2021-11-15", 
+	"einddatum": "2022-01-28", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB0102", "IB1102"],
+	"tentamens": ["2022-02-01", "2022-04-25", "2022-08-23"]
+},
+{
+	"code": "IB0302",
+	"naam": "Relationele databases",
+	"startdatum": "2022-02-07", 
+	"einddatum": "2022-04-15", 
+	"sbu": 140,
+	"voorkennisverplicht": [],
+	"voorkennisgewenst": ["IB1002"],
+	"tentamens": ["2022-04-21", "2022-07-07", "2022-11-11"]
+},
+{
+	"code": "IB0902",
+	"naam": "Geavanceerd objectgeorienteerd programmeren",
+	"startdatum": "2022-02-07", 
+	"einddatum": "2022-04-15", 
+	"sbu": 140,
+	"voorkennisverplicht": ["IB1102"],
+	"voorkennisgewenst": [],
+	"tentamens": ["2022-04-19", "2022-07-05", "2022-11-10"]
+},
+{
+	"code": "IB0502",
+	"naam": "Model-driven development",
+	"startdatum": "2022-04-25", 
+	"einddatum": "2022-07-01", 
+	"sbu": 140,
+	"voorkennisverplicht": ["IB0302"],
+	"voorkennisgewenst": ["IB0102"],
+	"tentamens": ["2022-07-05", "2022-11-09"]
+}
+,
+{
+	"code": "IB1202",
+	"naam": "Practicum ontwerpen en implementeren",
+	"startdatum": "2021-11-15", 
+	"einddatum": "2022-01-28", 
+	"sbu": 140,
+	"voorkennisverplicht": ["IB0302", "IB1002", "IB1102", "IB0902"],
+	"voorkennisgewenst": [],
+	"tentamens": []
+},
+{
+	"code": "IB1202",
+	"naam": "Practicum ontwerpen en implementeren",
+	"startdatum": "2022-04-25", 
+	"einddatum": "2022-07-01", 
+	"sbu": 140,
+	"voorkennisverplicht": ["IB0302", "IB1002", "IB1102", "IB0902"],
+	"voorkennisgewenst": [],
+	"tentamens": []
+}
+]
