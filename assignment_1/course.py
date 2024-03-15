@@ -1,5 +1,5 @@
 import datetime
-
+import typing
 
 def create_course(courseinfo):
     newcourse = Course(courseinfo['code'], courseinfo['naam'],
@@ -61,8 +61,23 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, startdate=None, enddate=None):
+    def __init__(self, code, title, sbu, required_courses, desired_courses, startdate=None, enddate=None,   ):
         # TODO: implement
+        self.code:str = code
+        self.title:str = title
+        self.sbu:int = sbu
+        self.startdate:str = startdate
+        self.enddate:str = enddate
+        self.required_courses:list(str) = required_courses
+        self.desired_courses: list(str) = desired_courses
+
+    def add_required_courses(self):
+        req_crs = []
+        for course in courseinfo:
+            req_crs.append(course)
+        return req_crs
+
+
 
     def __str__(self):
         """ string with:
