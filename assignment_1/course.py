@@ -11,17 +11,7 @@ def create_course(courseinfo):
     return newcourse
 
 # functions for lists of courses
-def add_required_courses(course):
-    """ Function to add required courses """
-    course.required_foreknowledage.append(course)
 
-def add_desired_courses(course):
-    """ Function to add desired courses """
-    course.desired_foreknowledge.append(course)
-
-def add_exams (date):
-    """ Function to add exams """
-    course.exams.append(date)
 
 
 # TODO: create and implement
@@ -72,7 +62,7 @@ class Start_and_enddate:
 
 class Course:
     # TODO: implement and extend with attributes and methods
-    required_foreknowledage = []
+    required_foreknowledge = []
     desired_foreknowledge = []
     exams = []
 
@@ -95,17 +85,37 @@ class Course:
         - new line
         """
         # TODO: implement
-
+        # Done
         #string representing the required foreknowledge
-        required_foreknowledage =''
-        for code in required_foreknowledage:
-            required_foreknowledage += ' , ' + str(code)
+        required_foreknowledge = ''
+        if not required_foreknowledge:
+            required_foreknowledge += "Geen verplicht voorkennis"
+        else:
+            for code in required_foreknowledge:
+                required_foreknowledge += ' , ' + str(code)
 
         #string representing the desire foreknowledge
-        desired_foreknowledge =''
-        for code in desired_foreknowledge:
-            desired_foreknowledge += ' , ' + str(code)
+        desired_foreknowledge = ''
+        if not desired_foreknowledge:
+            desired_foreknowledge +="Geen gewenste voorkennis"
+        else:
+            for code in desired_foreknowledge:
+                desired_foreknowledge += ' , ' + str(code)
 
-        return str(self.code + ',' + self.title + ',' + self.period + '\n'
-        + ',' + required_foreknowledage + '\n'
-        + ',' + desired_foreknowledge + '\n')
+
+        return str(self.code + ',' + self.title + ',' + str(self.dates.quartile()) + '\n'
+            + ',' + required_foreknowledge + '\n'
+            + ',' + desired_foreknowledge + '\n')
+
+
+    def add_required_courses(self,course):
+        """ Function to add required courses """
+        self.required_foreknowledge.append(course)
+
+    def add_desired_courses(self,course):
+        """ Function to add desired courses """
+        self.desired_foreknowledge.append(course)
+
+    def add_exams(self, date):
+        """ Function to add exams """
+        self.exams.append(date)
