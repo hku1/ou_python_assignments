@@ -8,7 +8,7 @@ def create_course(courseinfo):
                        courseinfo['einddatum'])
     newcourse.add_required_courses(courseinfo['voorkennisverplicht'])
     newcourse.add_desired_courses(courseinfo['voorkennisgewenst'])
-    # newcourse.add_exams(courseinfo['tentamens'])
+    newcourse.add_exams(courseinfo['tentamens'])
     return newcourse
 
 
@@ -64,16 +64,16 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, required_courses, desired_courses, exams, startdate=None, enddate=None):
+    def __init__(self, code, title, sbu, required_courses, desired_courses, exams=None, startdate=None, enddate=None):
         # TODO: implement
         self.code: str = code
         self.title: str = title
         self.sbu: int = sbu
-        self.startdate: str = startdate
-        self.enddate: str = enddate
+        self.startdate: Start_and_enddate = Start_and_enddate(startdate)
+        self.enddate: Start_and_enddate = Start_and_enddate(enddate)
         self.required_courses: list = required_courses
         self.desired_courses: list = desired_courses
-        self.exams: list[str] = exams
+        self.exams: list = exams
 
     def add_required_courses(self, courses):
         self.required_courses = []
@@ -88,7 +88,7 @@ class Course:
         return self.desired_courses
 
     def add_exams(self, exams):
-        exams = []
+        self.exams = []
         for exam in exams:
             self.exams.append(exam)
         return self.exams

@@ -1,10 +1,6 @@
 import pathlib
 import json
 import course
-import os
-
-os.chdir('assignments/assignment_1')
-print(pathlib.Path.cwd())
 
 class Preparation:
     COURSES_DONE_FILE = 'curssengedaan.json'
