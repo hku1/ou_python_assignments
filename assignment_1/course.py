@@ -1,14 +1,16 @@
 import datetime
 import typing
 
+
 def create_course(courseinfo):
     newcourse = Course(courseinfo['code'], courseinfo['naam'],
-                courseinfo['sbu'], courseinfo['startdatum'],
-                courseinfo['einddatum'])
+                       courseinfo['sbu'], courseinfo['startdatum'],
+                       courseinfo['einddatum'])
     newcourse.add_required_courses(courseinfo['voorkennisverplicht'])
     newcourse.add_desired_courses(courseinfo['voorkennisgewenst'])
-    newcourse.add_exams(courseinfo['tentamens'])
+    # newcourse.add_exams(courseinfo['tentamens'])
     return newcourse
+
 
 # functions for lists of courses
 
@@ -17,6 +19,7 @@ def create_course(courseinfo):
 
 class Start_and_enddate:
     """ Class for objects with a startdate and an enddate """
+
     def __init__(self, startdate=None, enddate=None):
         self.startdate = None
         self.enddate = None
@@ -61,23 +64,34 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, required_courses, desired_courses, startdate=None, enddate=None,   ):
+    def __init__(self, code, title, sbu, required_courses, desired_courses, exams, startdate=None, enddate=None):
         # TODO: implement
-        self.code:str = code
-        self.title:str = title
-        self.sbu:int = sbu
-        self.startdate:str = startdate
-        self.enddate:str = enddate
-        self.required_courses:list(str) = required_courses
-        self.desired_courses: list(str) = desired_courses
+        self.code: str = code
+        self.title: str = title
+        self.sbu: int = sbu
+        self.startdate: str = startdate
+        self.enddate: str = enddate
+        self.required_courses: list = required_courses
+        self.desired_courses: list = desired_courses
+        self.exams: list[str] = exams
 
-    def add_required_courses(self):
-        req_crs = []
-        for course in courseinfo:
-            req_crs.append(course)
-        return req_crs
+    def add_required_courses(self, courses):
+        self.required_courses = []
+        for course in courses:
+            self.required_courses.append(course)
+        return self.required_courses
 
+    def add_desired_courses(self, courses):
+        self.desired_courses = []
+        for course in courses:
+            self.desired_courses.append(course)
+        return self.desired_courses
 
+    def add_exams(self, exams):
+        exams = []
+        for exam in exams:
+            self.exams.append(exam)
+        return self.exams
 
     def __str__(self):
         """ string with:
@@ -91,4 +105,3 @@ class Course:
         - new line
         """
         # TODO: implement
-
