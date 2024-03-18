@@ -5,7 +5,7 @@ import preparation
 class Planner:
     """" class to filter and store Course class object"""
 
-    def __init__(self, prep, varcrs=None, fxdcrs=None):
+    def __init__(self, prep, varcrs, fxdcrs):
         self.prep = prep
         self.varcrs = varcrs
         self.fxdcrs = fxdcrs
@@ -19,6 +19,8 @@ class Planner:
         prior = reqprior + dsrdprior
         self.varcrs = course.var_crses(prior)
         self.fxdcrs = course.fxd_crses(prior)
+
+
 
     # TODO: implement
 

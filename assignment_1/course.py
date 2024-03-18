@@ -27,15 +27,25 @@ def req_prior(courses, done):
 
 def dsrd_prior(courses, done):
     """"select available course that not have been done and that
-            have completed courses ad desired knowledge"""
+            have completed courses as desired knowledge"""
     dsrdprior_lst = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
     return dsrdprior_lst
 
 
 def fxd_crses(courses):
-    """"select courses that have a fixed start date"""
+    """"select available courses that have a fixed start date"""
     fxd_lst = [course for course in courses if course.dates.nodates() is False]
     return fxd_lst
+
+
+def fxd_crses_req_prior(courses, reqprior):
+    fxdcrs_req_lst = [course for course in courses if course in reqprior]
+    return fxdcrs_req_lst
+
+
+def fxd_crses_dsrd_prior(courses, dsrdprior):
+    fxdcrs_dsrd_lst = [course for course in courses if course in dsrdprior]
+    return fxdcrs_dsrd_lst
 
 
 def var_crses(courses):
@@ -48,6 +58,11 @@ def courses_in_quartile(courses, quartile: int):
     """ select courses that are given in a given quartile"""
     crs_quart = [course for course in courses if course.dates.quartile() == quartile]
     return crs_quart
+
+def exams_in_quartile(exams, quartile: int):
+    """ select courses that are given in a given quartile"""
+    exm_quart = [exam for exam in exams if course.exams.quartile() == quartile]
+    return exm_quart
 
 
 class Start_and_enddate:
