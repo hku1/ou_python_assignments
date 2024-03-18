@@ -3,6 +3,8 @@ import json
 import course
 
 class Preparation:
+    """" info"""
+
     COURSES_DONE_FILE = 'curssengedaan.json'
     COURSES_OFFER_FILE = 'cursusaanbod.json'
     available_courses = []
