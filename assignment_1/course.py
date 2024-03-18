@@ -74,16 +74,17 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, required_courses, desired_courses, exams=None, startdate=None, enddate=None):
+    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None):
         # TODO: implement
         self.code: str = code
         self.title: str = title
         self.sbu: int = sbu
-        self.startdate: Start_and_enddate = Start_and_enddate(startdate)
-        self.enddate: Start_and_enddate = Start_and_enddate(enddate)
+        self.startdate: str = startdate
+        self.enddate: str = enddate
         self.required_courses: list = required_courses
         self.desired_courses: list = desired_courses
         self.exams: list = exams
+        self.dates = Start_and_enddate(startdate, enddate)
 
     def add_required_courses(self, courses):
         self.required_courses = []
