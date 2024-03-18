@@ -48,7 +48,9 @@ class Start_and_enddate:
         startdate in month 4: return 4
         otherwise: return -1
         """
-        if self.startdate.month == 9:
+        if self.nodates():
+            quartile = -1
+        elif self.startdate.month == 9:
             quartile = 1
         elif self.startdate.month == 11:
             quartile = 2
@@ -125,3 +127,38 @@ class Course:
     def get_gewenste_voorkennis(self):
         """returns the desired foreknowledge list"""
         return self.__desired_foreknowledge
+
+    def print_courses(self):
+        """Gives a string representation of the course object"""
+        exam = self.exams
+        quarter = 'Quarter: '
+        verplichte_voorkennis = []
+        gewenste_voorkennis = []
+
+        if self.dates.nodates():
+            quarter += ' Geen'
+        else:
+            quarter += str(self.dates.quartile())
+
+        if not self.get_vereiste_voorkennis():
+            verplichte_voorkennis = 'geen verplichte voorkennis'
+        else:
+            verplichte_voorkennis = 'verplichte voorkennis: ' + str(self.get_vereiste_voorkennis())
+
+        if not self.get_gewenste_voorkennis():
+            gewenste_voorkennis += 'geen gewenste voorkennis'
+        else:
+            gewenste_voorkennis += 'gewenset voorkennis: ' + str(self.get_gewenste_voorkennis())
+
+        return (
+            self.title + ' \n' + \
+            'Cursus: ' +self.code + 'cursus test ' + ' \n' + \
+            'Examen: ' + 'test exam' + ' \n' + \
+            quarter + ' \n' + \
+            str(verplichte_voorkennis) + ' \n' + str(gewenste_voorkennis))
+
+
+#######code for testing print_courses
+
+x = Course('dakfsdl', 'dit is een test')
+x.print_courses()
