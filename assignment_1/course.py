@@ -1,6 +1,4 @@
 import datetime
-import typing
-
 
 def create_course(courseinfo):
     newcourse = Course(courseinfo['code'], courseinfo['naam'],
@@ -14,7 +12,19 @@ def create_course(courseinfo):
 
 # functions for lists of courses
 
-# TODO: create and implement
+def notdone(courses, done):
+    """" select courses from list of available courses that not hve bene done"""
+    notdone_lst = [course for course in courses if course.code not in done]
+    return notdone_lst
+
+def req_prior(courses, done):
+    reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
+    return reqprior_lst
+
+def dsrd_prior(courses, done):
+    dsrdprior_lst = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
+    return dsrdprior_lst
+
 
 
 class Start_and_enddate:
@@ -93,7 +103,10 @@ class Course:
             self.exams.append(exam)
         return self.exams
 
-    def __str__(self):
+    def get_code(self):
+        return self.code
+    
+    # def __str__(self):
         """ string with:
         - code,
         - title,
@@ -104,4 +117,6 @@ class Course:
         - codes of desired foreknowledge or 'geen gewenste voorkennis'
         - new line
         """
+        # return('code {0), title {1}, ')
+
         # TODO: implement
