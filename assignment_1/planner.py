@@ -26,9 +26,11 @@ class Planner:
         """
         :param quartile: int that shows the quartile
         """
-        fxd_quartile = course.courses_in_quartile(self.fxdcrs, quartile)
-        if courses_in_quartile(fxdcrs, quartile):
-            return
+
+        if course.courses_in_quartile(self.fxdcrs, quartile):
+            return fxd_quartile
+        else:
+
 
     # TODO: implement
 
