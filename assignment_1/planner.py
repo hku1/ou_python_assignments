@@ -1,4 +1,4 @@
-    import course
+import course
 
 
 class Planner:
@@ -114,7 +114,6 @@ class Planner:
                 return_list = return_list.append(course)
         return return_list
 
-############nog niet klaar #############33
     def bepaal_cursus_in_quartaal(self,quarter) -> list[course]:
         """Gives the courses with exams in this quarter
                 :param quartile: int that shows the quartile
@@ -122,7 +121,7 @@ class Planner:
         """
         return_list = []
         for temp_course in self.bepaal_cursus_die_gedaan_kan_worden():
-            if temp_course.dates.:
+            if temp_course.datesdates.quartile():
                 return_list = return_list.append(course)
         return return_list
 
