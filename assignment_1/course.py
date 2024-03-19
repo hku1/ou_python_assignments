@@ -7,6 +7,7 @@ def create_course(courseinfo):
     newcourse.add_required_courses(courseinfo['voorkennisverplicht'])
     newcourse.add_desired_courses(courseinfo['voorkennisgewenst'])
     newcourse.add_exams(courseinfo['tentamens'])
+    newcourse.add_exams_quartile(courseinfo['tentamens'])
     return newcourse
 
 
@@ -59,11 +60,6 @@ def courses_in_quartile(courses, quartile: int):
     crs_quart = [course for course in courses if course.dates.quartile() == quartile]
     return crs_quart
 
-def exams_in_quartile(exams, quartile: int):
-    """ select courses that are given in a given quartile"""
-    exm_quart = [exam for exam in exams if course.exams.quartile() == quartile]
-    return exm_quart
-
 
 class Start_and_enddate:
     """ Class for objects with a startdate and an enddate """
@@ -112,7 +108,7 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None):
+    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None, examsq=None):
         # TODO: implement
         self.code: str = code
         self.title: str = title
@@ -123,8 +119,7 @@ class Course:
         self.desired_courses: list = desired_courses
         self.exams: list = exams
         self.dates = Start_and_enddate(startdate, enddate)
-
-
+        self.examsq = examsq
     def add_required_courses(self, courses):
         self.required_courses = []
         for course in courses:
@@ -143,10 +138,14 @@ class Course:
             self.exams.append(exam)
         return self.exams
 
-    def get_code(self):
-        return self.code
-    
-    # def __str__(self):
+    def add_exams_quartile(self, examsq):
+        self.examsq = []
+        for exam in examsq:
+            self.examsq.append( Start_and_enddate(exam).quartile())
+        return self.examsq
+
+
+       # def __str__(self):
         """ string with:
         - code,
         - title,
