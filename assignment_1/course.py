@@ -61,6 +61,12 @@ def courses_in_quartile(courses, quartile: int):
     return crs_quart
 
 
+def exams_in_quartile(courses, quartile: int):
+    """ select courses that have an exam in a given quartile"""
+    exms_quart = [course for course in courses if quartile in course.examsq]
+    return exms_quart
+
+
 class Start_and_enddate:
     """ Class for objects with a startdate and an enddate """
 
@@ -120,6 +126,7 @@ class Course:
         self.exams: list = exams
         self.dates = Start_and_enddate(startdate, enddate)
         self.examsq = examsq
+
     def add_required_courses(self, courses):
         self.required_courses = []
         for course in courses:
