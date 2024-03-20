@@ -13,41 +13,72 @@ def create_course(courseinfo):
 
 # functions for lists of courses
 
-def notdone(courses, done):
-    """" select courses from list of available courses that not have been done"""
-    notdone_lst = [course for course in courses if course.code not in done]
-    return notdone_lst
+def available(courses, done):
+    """select courses that not have been done from list of all available courses """
+    avlble = [course for course in courses if course.code not in done]
+    return avlble
 
 
-def req_prior(courses, done):
-    """"select available course that not have been done and that
-        have completed courses as required knowledge"""
-    reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
+# def available_required_satisfied(courses, done):
+#     """"select course that have
+#         completed courses as required knowledge or no
+#         required knowledge condition (empty string)"""
+#     reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
+#     return reqprior_lst
+
+
+def available_required_satisfied(courses, done):
+    """Select courses that have completed courses
+       as required knowledge or no required knowledge condition
+       (empty list)"""
+    reqprior_lst = [course for course in courses if all(req_course in done for req_course in course.required_courses)]
     return reqprior_lst
 
 
-def dsrd_prior(courses, done):
-    """"select available course that not have been done and that
-            have completed courses as desired knowledge"""
-    dsrdprior_lst = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
-    return dsrdprior_lst
-
-
 def fxd_crses(courses):
-    """"select available courses that have a fixed start date"""
+    """"select courses that have a fixed start date"""
     fxd_lst = [course for course in courses if course.dates.nodates() is False]
     return fxd_lst
 
 
-def fxd_crses_req_prior(courses, reqprior):
-    fxdcrs_req_lst = [course for course in courses if course in reqprior]
-    return fxdcrs_req_lst
+def dsrd_prior_knwledge(courses, done):
+    dsrd_prio = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
+    return dsrd_prio
 
 
-def fxd_crses_dsrd_prior(courses, dsrdprior):
-    fxdcrs_dsrd_lst = [course for course in courses if course in dsrdprior]
-    return fxdcrs_dsrd_lst
+def req_codes(courses, done):
+    dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
+    return dsrd_cdes
 
+def dsrd_codes(courses, done):
+    dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
+    return dsrd_cdes
+
+
+def future_crses(courses, code_list):
+    """select  from a list of courses those course
+       that have a non-empty required knowledge field """
+    future_lst = [course for course in courses if course.code in code_list]
+    return future_lst
+
+# def dsrd_future_crss(courses):
+#     """select  from a list of courses those course
+#        that have a non-empty desired knowledge field """
+#     dsrd_future_lst = [course for course in courses if course.code in course.desired_courses]
+#     return dsrd_future_lst
+
+# def req_prior(courses, done):
+#     """"select available course that not have been done and that
+#         have completed courses as required knowledge"""
+#     reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
+#     return reqprior_lst
+
+
+# def dsrd_prior(courses, done):
+#     """select available course that not have been done and that
+#             have completed courses as desired knowledge"""
+#     dsrdprior_lst = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
+#     return dsrdprior_lst
 
 def var_crses(courses):
     """"select courses that have a variable start date"""

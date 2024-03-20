@@ -1,49 +1,70 @@
 import course
-import preparation
-
 
 class Planner:
     """" class to filter and store Course class object"""
 
-    def __init__(self, prep, varcrs, fxdcrs, reqprior, dsrdprior, selected):
+    def __init__(self, prep):
         self.prep = prep
-        self.varcrs = varcrs
-        self.fxdcrs = fxdcrs
-        self.reqprior = reqprior
-        self.dsrdprior = dsrdprior
-        self.selected = selected
+        self.fxd_courses = []
+        self.var_courses = []
+        self.course_selected = []
 
     # TODO: implement
 
-    def _compute_current_state(self):
-        crs_not_done = course.notdone(self.prep.available_courses, self.prep.done_codes)
-        self.reqprior = course.req_prior(crs_not_done, self.prep.done_codes)
-        self.dsrdprior = course.dsrd_prior(crs_not_done, self.prep.done_codes)
-        prior = self.reqprior + self.dsrdprior
-        non_prior = crs_not_done not in prior
-        self.varcrs = course.var_crses(prior)
-        self.fxdcrs = course.fxd_crses(prior)
-
-
-
-
+    def compute_current_state(self):
+        available_courses = course.available(self.prep.available_courses, self.prep.done_codes)
+        done_codes = self.prep.done_codes
+        available_req_stfd = course.available_required_satisfied(available_courses, done_codes)
+        self.fxd_courses = course.fxd_crses(available_req_stfd)
+        self.var_courses = course.var_crses(available_req_stfd)
 
     # TODO: implement
 
-    def _choose_course(self, quartile: int):
+    def choose_course(self, quartile: int):
         """
         :param quartile: int that shows the quartile
         """
 
-        if course.courses_in_quartile(self.fxdcrs, quartile):
-            self.selected = course.courses_in_quartile(self.fxdcrs, quartile)
-        elif course.fxd_crses_req_prior(self.selected, self.reqprior):
-            self.selected = course.fxd_crses_req_prior(self.selected, self.reqprior)
-        elif course.fxd_crses_dsrd_prior(self.selected, self.dsrdprior):
-            self.selected = course.fxd_crses_req_prior(self.selected, self.reqprior)
-        elif course.fxd_crses_dsrd_prior(self.selected, self.dsrdprior):
-            self.selected = course.fxd_crses_req_prior(self.selected, self.reqprior)
-        elif
+        if course.courses_in_quartile(self.fxd_courses, quartile):
+            self.course_selected = self.fxd_courses
+            if len(self.course_selected) > 1:
+                self.course_selected = course.dsrd_prior_knwledge(self.course_selected, self.prep.done_codes)
+                if len(self.course_selected) > 1:
+                    rqrd_cds = course.req_codes(self.course_selected, self.prep.done_codes)
+                    self.course_selected = course.future_crses(self.course_selected, rqrd_cds)
+                    if len(self.course_selected) > 1:
+                        dsrd_cds = course.dsrd_codes(self.course_selected, self.prep.done_codes)
+                        self.course_selected = course.future_crses(self.course_selected, dsrd_cds)
+                        if len(self.course_selected) > 1:
+                            self.course_selected = self.course_selected[0]
+                            return self.course_selected
+                        else:
+                            return self.course_selected
+                    else:
+                        return self.course_selected
+                else:
+                    return self.course_selected
+            else:
+                return self.course_selected
+
+        if course.courses_in_quartile(self.var_courses, quartile):
+            self.course_selected = self.var_courses
+            if len(self.course_selected) > 1:
+                self.course_selected = course.dsrd_prior_knwledge(self.course_selected, self.prep.done_codes)
+                if len(self.course_selected) > 1:
+                    self.var_courses = course.exams_in_quartile(self.course_selected, quartile)
+                    if len(self.course_selected) > 1:
+                        self.course_selected = self.course_selected[0]
+                        return self.course_selected
+                    else:
+                        return self.course_selected
+                else:
+                    return self.course_selected
+            else:
+                return self.course_selected
+        else:
+            self.course_selected = None
+            return self.course_selected
 
     # TODO: implement
 
@@ -52,6 +73,9 @@ class Planner:
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
+
+
+
 
     # TODO: implement
 
