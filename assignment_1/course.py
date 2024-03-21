@@ -207,6 +207,4 @@ class Course:
         else:
             self.desired_courses = 'geen gewenste voorkennis'
 
-        return '{0),{1}, \n {2) \n {3} \n'.format(self.code, self.title, self.required_courses, self.desired_courses)
-
-        # TODO: implement
+        return '{0},{1}, \n {2} \n {3} \n'.format(self.code, self.title, self.required_courses, self.desired_courses)

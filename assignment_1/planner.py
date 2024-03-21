@@ -74,10 +74,10 @@ class Planner:
        :return: string for this quartile
        """
         self.compute_current_state()
-        course = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
-        self.choose_course(quartile)
-        course = course + self.course.course_selected
-
+        course1 = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
+        chosen_course = self.choose_course(quartile)
+        course1 = course1 + str(chosen_course)
+        print(course1)
 
 
 
