@@ -68,14 +68,16 @@ class Planner:
 
     # TODO: implement
 
-    def _generate_for_quartile(self, quartile):
+    def generate_for_quartile(self, quartile):
         """
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
+        text ='Kwartiel ' + quartile + '\n'
+        + 'Te volgen cursus : '+ '\n'
+        + self.choose_course(quartile).__str__()
 
-
-
+        print(text)
 
     # TODO: implement
 
@@ -83,4 +85,5 @@ class Planner:
         """
         :return: string showing the planning
         """
-        self.generate_for_quartile(1)
+        for quartile in range(1,5):
+            self.generate_for_quartile(quartile)
