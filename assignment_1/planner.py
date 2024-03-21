@@ -17,6 +17,8 @@ class Planner:
         available_req_stfd = course.available_required_satisfied(available_courses, done_codes)
         self.fxd_courses = course.fxd_crses(available_req_stfd)
         self.var_courses = course.var_crses(available_req_stfd)
+        lst = [self.fxd_courses, self.var_courses]
+        return lst
 
     # TODO: implement
 
@@ -47,24 +49,21 @@ class Planner:
             else:
                 return self.course_selected
 
-        if course.courses_in_quartile(self.var_courses, quartile):
-            self.course_selected = self.var_courses
+        self.course_selected = self.var_courses
+        if len(self.course_selected) > 1:
+            self.course_selected = course.dsrd_prior_knwledge(self.course_selected, self.prep.done_codes)
             if len(self.course_selected) > 1:
-                self.course_selected = course.dsrd_prior_knwledge(self.course_selected, self.prep.done_codes)
+                self.var_courses = course.exams_in_quartile(self.course_selected, quartile)
                 if len(self.course_selected) > 1:
-                    self.var_courses = course.exams_in_quartile(self.course_selected, quartile)
-                    if len(self.course_selected) > 1:
-                        self.course_selected = self.course_selected[0]
-                        return self.course_selected
-                    else:
-                        return self.course_selected
+                    self.course_selected = self.course_selected[0]
+                    return self.course_selected
                 else:
                     return self.course_selected
             else:
                 return self.course_selected
         else:
-            self.course_selected = None
             return self.course_selected
+
 
     # TODO: implement
 
@@ -73,6 +72,10 @@ class Planner:
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
+        self.compute_current_state()
+        course = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
+        self.choose_course(quartile)
+        course = course + self.course.course_selected
 
 
 

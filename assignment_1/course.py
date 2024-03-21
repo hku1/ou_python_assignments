@@ -183,7 +183,7 @@ class Course:
         return self.examsq
 
 
-       # def __str__(self):
+    def __str__(self):
         """ string with:
         - code,
         - title,
@@ -194,6 +194,16 @@ class Course:
         - codes of desired foreknowledge or 'geen gewenste voorkennis'
         - new line
         """
-        # return('code {0), title {1}, ')
+        if self.required_courses:
+            return 'verplichte voorkennis: {0} '.format(self.required_courses)
+        else:
+            self.required_courses = 'geen verplichte voorkennis'
+
+        if self.desired_courses:
+           return 'gewenste voorkennis: {0} '.format(self.desired_courses)
+        else:
+            self.desired_courses = 'geen gewenste voorkennis'
+
+        return '{0),{1}, \n {2) \n {3} \n'.format(self.code, self.title, self.required_courses, self.desired_courses)
 
         # TODO: implement
