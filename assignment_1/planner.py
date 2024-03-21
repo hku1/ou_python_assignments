@@ -62,6 +62,7 @@ class Planner:
             else:
                 return self.course_selected
         else:
+            self.course_selected = None
             return self.course_selected
 
 
@@ -86,4 +87,5 @@ class Planner:
         """
         :return: string showing the planning
         """
-        self.generate_for_quartile(1)
+        for quartile in range(1,5):
+            self._generate_for_quartile(quartile)
