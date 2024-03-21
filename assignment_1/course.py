@@ -1,5 +1,6 @@
 import datetime
 
+
 def create_course(courseinfo):
     newcourse = Course(courseinfo['code'], courseinfo['naam'],
                        courseinfo['sbu'], courseinfo['startdatum'],
@@ -50,6 +51,7 @@ def req_codes(courses, done):
     dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
     return dsrd_cdes
 
+
 def dsrd_codes(courses, done):
     dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
     return dsrd_cdes
@@ -60,6 +62,7 @@ def future_crses(courses, code_list):
        that have a non-empty required knowledge field """
     future_lst = [course for course in courses if course.code in code_list]
     return future_lst
+
 
 # def dsrd_future_crss(courses):
 #     """select  from a list of courses those course
@@ -145,7 +148,8 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None, examsq=None):
+    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None,
+                 examsq=None):
         # TODO: implement
         self.code: str = code
         self.title: str = title
@@ -179,11 +183,10 @@ class Course:
     def add_exams_quartile(self, examsq):
         self.examsq = []
         for exam in examsq:
-            self.examsq.append( Start_and_enddate(exam).quartile())
+            self.examsq.append(Start_and_enddate(exam).quartile())
         return self.examsq
 
-
-       # def __str__(self):
+    def __str__(self):
         """ string with:
         - code,
         - title,
@@ -194,6 +197,29 @@ class Course:
         - codes of desired foreknowledge or 'geen gewenste voorkennis'
         - new line
         """
-        # return('code {0), title {1}, ')
+        # string representing the required foreknowledge
+        required_foreknowledge = ''
+        if not required_foreknowledge:
+            required_foreknowledge += "Geen verplicht voorkennis"
+        else:
+            for code in required_foreknowledge:
+                required_foreknowledge += ' , ' + str(code)
 
-        # TODO: implement
+        # string representing the desire foreknowledge
+        desired_foreknowledge = ''
+        if not desired_foreknowledge:
+            desired_foreknowledge += "Geen gewenste voorkennis"
+        else:
+            for code in desired_foreknowledge:
+                desired_foreknowledge += ' , ' + str(code)
+
+        # exams or 'variable'
+        datums = ''
+        if self.dates.nodates():
+            datums += 'variable'
+        else:
+            datums += str(self.dates.startdate) + ' , ' + str(self.dates.enddate)
+
+        return str(self.title + ',' + self.code + ' ,' + datums + '\n'
+                   + required_foreknowledge + '\n'
+                   + desired_foreknowledge + '\n')
