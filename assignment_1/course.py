@@ -19,14 +19,6 @@ def available(courses, done):
     return avlble
 
 
-# def available_required_satisfied(courses, done):
-#     """"select course that have
-#         completed courses as required knowledge or no
-#         required knowledge condition (empty string)"""
-#     reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
-#     return reqprior_lst
-
-
 def available_required_satisfied(courses, done):
     """Select courses that have completed courses
        as required knowledge or no required knowledge condition
@@ -62,25 +54,6 @@ def future_crses(courses, code_list):
     future_lst = [course for course in courses if course.code in code_list]
     return future_lst
 
-
-# def dsrd_future_crss(courses):
-#     """select  from a list of courses those course
-#        that have a non-empty desired knowledge field """
-#     dsrd_future_lst = [course for course in courses if course.code in course.desired_courses]
-#     return dsrd_future_lst
-
-# def req_prior(courses, done):
-#     """"select available course that not have been done and that
-#         have completed courses as required knowledge"""
-#     reqprior_lst = [course for course in courses if any(req_course in done for req_course in course.required_courses)]
-#     return reqprior_lst
-
-
-# def dsrd_prior(courses, done):
-#     """select available course that not have been done and that
-#             have completed courses as desired knowledge"""
-#     dsrdprior_lst = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
-#     return dsrdprior_lst
 
 def var_crses(courses):
     """"select courses that have a variable start date"""
@@ -145,11 +118,10 @@ class Start_and_enddate:
 
 
 class Course:
-    # TODO: implement and extend with attributes and methods
 
     def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None,
                  examsq=None):
-        # TODO: implement
+
         self.code: str = code
         self.title: str = title
         self.sbu: int = sbu
@@ -198,15 +170,13 @@ class Course:
         - new line
         """
         if self.required_courses:
-            return 'verplichte voorkennis: {0} '.format(self.required_courses)
+            required_str = 'verplichte voorkennis: {0} '.format(self.required_courses)
         else:
-            self.required_courses = 'geen verplichte voorkennis'
+            required_str = 'geen verplichte voorkennis'
 
         if self.desired_courses:
-           return 'gewenste voorkennis: {0} '.format(self.desired_courses)
+            desired_str = 'gewenste voorkennis: {0} '.format(self.desired_courses)
         else:
-            self.desired_courses = 'geen gewenste voorkennis'
+            desired_str = 'geen gewenste voorkennis'
 
-        return '{0),{1}, \n {2) \n {3} \n'.format(self.code, self.title, self.required_courses, self.desired_courses)
-
-        # TODO: implement
+        return '{0}, {1}, \n {2} \n {3} \n'.format(self.code, self.title, required_str, desired_str)

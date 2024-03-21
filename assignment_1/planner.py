@@ -66,26 +66,22 @@ class Planner:
             return self.course_selected
 
 
-    # TODO: implement
-
-    def _generate_for_quartile(self, quartile):
+    def generate_for_quartile(self, quartile):
         """
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
         self.compute_current_state()
-        course = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
+        crse = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
         self.choose_course(quartile)
-        course = course + self.course.course_selected
+        crse += self.course_selected.__str__()
+        # self.prep.done_codes.update(self.course_selected.code)
+        return crse
 
-
-
-
-    # TODO: implement
 
     def generate(self):
         """
         :return: string showing the planning
         """
         for quartile in range(1,5):
-            self._generate_for_quartile(quartile)
+            self.generate_for_quartile(quartile)
