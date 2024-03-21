@@ -50,6 +50,7 @@ def req_codes(courses, done):
     dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
     return dsrd_cdes
 
+
 def dsrd_codes(courses, done):
     dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
     return dsrd_cdes
@@ -60,6 +61,7 @@ def future_crses(courses, code_list):
        that have a non-empty required knowledge field """
     future_lst = [course for course in courses if course.code in code_list]
     return future_lst
+
 
 # def dsrd_future_crss(courses):
 #     """select  from a list of courses those course
@@ -145,7 +147,8 @@ class Start_and_enddate:
 class Course:
     # TODO: implement and extend with attributes and methods
 
-    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None, examsq=None):
+    def __init__(self, code, title, sbu, startdate, enddate, required_courses=None, desired_courses=None, exams=None,
+                 examsq=None):
         # TODO: implement
         self.code: str = code
         self.title: str = title
@@ -179,7 +182,7 @@ class Course:
     def add_exams_quartile(self, examsq):
         self.examsq = []
         for exam in examsq:
-            self.examsq.append( Start_and_enddate(exam).quartile())
+            self.examsq.append(Start_and_enddate(exam).quartile())
         return self.examsq
 
 
