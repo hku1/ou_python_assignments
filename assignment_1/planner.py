@@ -5,9 +5,16 @@ class Planner:
 
     def __init__(self, prep):
         self.prep = prep
-        self.fxd_courses = []
-        self.var_courses = []
-        self.course_selected = []
+        self.fxd_courses = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
+                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
+        self.var_courses = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
+                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
+        self.course_selected = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
+                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
+        # self.fxd_courses = []
+        # self.var_courses = []
+        # self.course_selected = []
+        self.crse = []
 
     # TODO: implement
 
@@ -72,16 +79,24 @@ class Planner:
        :return: string for this quartile
        """
         self.compute_current_state()
-        crse = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
+        self.crse = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
         self.choose_course(quartile)
-        crse += self.course_selected.__str__()
-        # self.prep.done_codes.update(self.course_selected.code)
-        return crse
+        if self.course_selected:
+            cde = self.course_selected.code
+            self.crse += self.course_selected.__str__()
+            self.prep.done_codes.add(cde)
+        else:
+            self.crse += 'geen geschikte cursus in dit kwartiel\n'
+
+        return self.crse
 
 
     def generate(self):
         """
         :return: string showing the planning
         """
-        for quartile in range(1,5):
+        course_list = []
+        for quartile in range(1, 5):
             self.generate_for_quartile(quartile)
+            course_list.append(self.crse)
+        return course_list
