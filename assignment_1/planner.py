@@ -19,6 +19,11 @@ class Planner:
     # TODO: implement
 
     def compute_current_state(self):
+        """
+        Returns list of current fixed adn variable courses
+        :return: string for this quartile
+        """
+
         available_courses = course.available(self.prep.available_courses, self.prep.done_codes)
         done_codes = self.prep.done_codes
         available_req_stfd = course.available_required_satisfied(available_courses, done_codes)
@@ -31,6 +36,8 @@ class Planner:
 
     def choose_course(self, quartile: int):
         """
+        Returns the course chosen for the input quartile
+        :return:chosen course
         :param quartile: int that shows the quartile
         """
 
@@ -75,6 +82,7 @@ class Planner:
 
     def generate_for_quartile(self, quartile):
         """
+        Generates String with the details for the chosen coused in the selected quarter
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
@@ -93,6 +101,7 @@ class Planner:
 
     def generate(self):
         """
+        Generate a string output for all quarters with the selected courses and details
         :return: string showing the planning
         """
         course_list = []
