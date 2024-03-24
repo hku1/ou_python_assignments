@@ -11,12 +11,13 @@ class Planner:
                                  required_courses=None, desired_courses=None, exams=None, examsq=None)
         self.course_selected = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
                                  required_courses=None, desired_courses=None, exams=None, examsq=None)
+        self.course_selected_init = self.course_selected
         # self.fxd_courses = []
         # self.var_courses = []
         # self.course_selected = []
         self.crse = []
+        self.course_list = []
 
-    # TODO: implement
 
     def compute_current_state(self):
         available_courses = course.available(self.prep.available_courses, self.prep.done_codes)
@@ -27,7 +28,6 @@ class Planner:
         lst = [self.fxd_courses, self.var_courses]
         return lst
 
-    # TODO: implement
 
     def choose_course(self, quartile: int):
         """
@@ -88,6 +88,7 @@ class Planner:
         else:
             self.crse += 'geen geschikte cursus in dit kwartiel\n'
 
+        self.course_selected = self.course_selected_init
         return self.crse
 
 
@@ -95,8 +96,7 @@ class Planner:
         """
         :return: string showing the planning
         """
-        course_list = []
-        for quartile in range(1, 5):
+        for quartile in range(1, 2):
             self.generate_for_quartile(quartile)
-            course_list.append(self.crse)
-        return course_list
+            self.course_list.append(self.crse)
+        print(self.course_list)
