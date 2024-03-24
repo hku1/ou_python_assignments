@@ -1,25 +1,25 @@
 import course
 
+
 class Planner:
     """" class to filter and store Course class object"""
 
     def __init__(self, prep):
         self.prep = prep
         self.fxd_courses = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
-                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
+                                         required_courses=None, desired_courses=None, exams=None, examsq=None)
         self.var_courses = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
-                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
+                                         required_courses=None, desired_courses=None, exams=None, examsq=None)
         self.course_selected = course.Course(code=None, title=None, sbu=None, startdate=None, enddate=None,
-                                 required_courses=None, desired_courses=None, exams=None, examsq=None)
-        self.course_selected_init = self.course_selected
-        # self.fxd_courses = []
-        # self.var_courses = []
-        # self.course_selected = []
+                                             required_courses=None, desired_courses=None, exams=None, examsq=None)
         self.crse = []
-        self.course_list = []
 
+    def __compute_current_state(self):
+        """
+        Returns list of current fixed adn variable courses
+        :return: string for this quartile
+        """
 
-    def compute_current_state(self):
         available_courses = course.available(self.prep.available_courses, self.prep.done_codes)
         done_codes = self.prep.done_codes
         available_req_stfd = course.available_required_satisfied(available_courses, done_codes)
@@ -28,10 +28,12 @@ class Planner:
         lst = [self.fxd_courses, self.var_courses]
         return lst
 
-
-    def choose_course(self, quartile: int):
+    def __choose_course(self, quartile: int):
         """
+        Returns the course chosen for the input quartile
+        :return:chosen course
         :param quartile: int that shows the quartile
+        # no test as we are testing based on the given input and results in the assignment
         """
 
         if course.courses_in_quartile(self.fxd_courses, quartile):
@@ -45,7 +47,7 @@ class Planner:
                         dsrd_cds = course.dsrd_codes(self.course_selected, self.prep.done_codes)
                         self.course_selected = course.future_crses(self.course_selected, dsrd_cds)
                         if len(self.course_selected) > 1:
-                            self.course_selected = self.course_selected[0]
+                            self.course_selected = self.course_selected
                             return self.course_selected
                         else:
                             return self.course_selected
@@ -72,31 +74,45 @@ class Planner:
             self.course_selected = None
             return self.course_selected
 
-
-    def generate_for_quartile(self, quartile):
+    def __generate_for_quartile(self, quartile):
         """
+        Generates String with the details for the chosen coused in the selected quarter
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """
-        self.compute_current_state()
+        self.__compute_current_state()
         self.crse = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
-        self.choose_course(quartile)
+        self.__choose_course(quartile)
+        # in case a list is provided, take 1st course element of list, otherwise take course item
         if self.course_selected:
-            cde = self.course_selected.code
-            self.crse += self.course_selected.__str__()
+            if isinstance(self.course_selected, list):
+                cde = self.course_selected[0].code
+                self.crse += self.course_selected[0].__str__()
+            else:
+                cde = self.course_selected.code
+                self.crse += self.course_selected.__str__()
             self.prep.done_codes.add(cde)
         else:
             self.crse += 'geen geschikte cursus in dit kwartiel\n'
 
-        self.course_selected = self.course_selected_init
         return self.crse
-
 
     def generate(self):
         """
+        Generate a string output for all quarters with the selected courses and details
         :return: string showing the planning
         """
-        for quartile in range(1, 2):
-            self.generate_for_quartile(quartile)
-            self.course_list.append(self.crse)
-        print(self.course_list)
+        course_list = []
+        for quartile in range(1, 5):
+            self.__generate_for_quartile(quartile)
+            print(self.crse + '\n')
+
+    def __print_courselist(self, courselist):
+        """
+        Help function to print courselists
+        :param: courselist
+        """
+        text = ''
+        for c in courselist:
+            text += c.code + " - "
+        print(text)

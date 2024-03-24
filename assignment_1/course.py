@@ -1,6 +1,11 @@
 import datetime
 
 def create_course(courseinfo):
+    """
+    Creates a new course object with the info in courseinfo
+    :param:courseinfo
+    :return:new course object
+    """
     newcourse = Course(courseinfo['code'], courseinfo['naam'],
                        courseinfo['sbu'], courseinfo['startdatum'],
                        courseinfo['einddatum'])
@@ -10,11 +15,15 @@ def create_course(courseinfo):
     newcourse.add_exams_quartile(courseinfo['tentamens'])
     return newcourse
 
-
 # functions for lists of courses
 
 def available(courses, done):
-    """select courses that not have been done from list of all available courses """
+    """
+    select courses that not have been done from list of all available courses
+    :param:List of all courses and list of done courses
+    :return:List of available courses
+    """
+
     avlble = [course for course in courses if course.code not in done]
     return avlble
 
@@ -22,28 +31,40 @@ def available(courses, done):
 def available_required_satisfied(courses, done):
     """Select courses that have completed courses
        as required knowledge or no required knowledge condition
-       (empty list)"""
+       (empty list)
+    """
     reqprior_lst = [course for course in courses if all(req_course in done for req_course in course.required_courses)]
     return reqprior_lst
 
 
 def fxd_crses(courses):
-    """"select courses that have a fixed start date"""
+    """"
+    select courses that have a fixed start date
+    """
     fxd_lst = [course for course in courses if course.dates.nodates() is False]
     return fxd_lst
 
 
 def dsrd_prior_knwledge(courses, done):
+    """"
+       select desired courses for which we have the required knowledge
+    """
     dsrd_prio = [course for course in courses if any(dsrd_course in done for dsrd_course in course.desired_courses)]
     return dsrd_prio
 
 
 def req_codes(courses, done):
-    dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
-    return dsrd_cdes
+    """""
+       select required courses which are not done yet
+    """
+    req_codes = [code for course in courses for code in course.required_courses_courses if code not in done]
+    return req_codes
 
 
 def dsrd_codes(courses, done):
+    """"
+    select desired courses are not done yet
+    """
     dsrd_cdes = [code for course in courses for code in course.desired_courses if code not in done]
     return dsrd_cdes
 
@@ -157,25 +178,25 @@ class Course:
             self.examsq.append(Start_and_enddate(exam).quartile())
         return self.examsq
 
-    # def __str__(self):
-    #     """ string with:
-    #     - code,
-    #     - title,
-    #     - period,
-    #     - new line
-    #     - codes of required foreknowledge or 'geen verplichte voorkennis'
-    #     - new line
-    #     - codes of desired foreknowledge or 'geen gewenste voorkennis'
-    #     - new line
-    #     """
-    #     if self.required_courses:
-    #         required_str = 'verplichte voorkennis: {0} '.format(self.required_courses)
-    #     else:
-    #         required_str = 'geen verplichte voorkennis'
-    #
-    #     if self.desired_courses:
-    #         desired_str = 'gewenste voorkennis: {0} '.format(self.desired_courses)
-    #     else:
-    #         desired_str = 'geen gewenste voorkennis'
-    #
-    #     return '{0}, {1}, \n {2} \n {3} \n'.format(self.code, self.title, required_str, desired_str)
+    def __str__(self):
+        """ string with:
+        - code,
+        - title,
+        - period,
+        - new line
+        - codes of required foreknowledge or 'geen verplichte voorkennis'
+        - new line
+        - codes of desired foreknowledge or 'geen gewenste voorkennis'
+        - new line
+        """
+        if self.required_courses:
+            required_str = 'verplichte voorkennis: {0} '.format(self.required_courses)
+        else:
+            required_str = 'geen verplichte voorkennis'
+
+        if self.desired_courses:
+            desired_str = 'gewenste voorkennis: {0} '.format(self.desired_courses)
+        else:
+            desired_str = 'geen gewenste voorkennis'
+
+        return '{0}, {1}, \n {2} \n {3} \n'.format(self.code, self.title, required_str, desired_str)
