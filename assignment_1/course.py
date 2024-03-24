@@ -57,7 +57,6 @@ def req_codes(courses, done):
     """""
        select required courses which are not done yet
     """
-    #### changed below to course.required_courses_courses from course.desired_courses_courses SC
     req_codes = [code for course in courses for code in course.required_courses_courses if code not in done]
     return req_codes
 
