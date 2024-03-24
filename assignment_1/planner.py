@@ -76,7 +76,7 @@ class Planner:
 
     def __generate_for_quartile(self, quartile):
         """
-        Generates String with the details for the chosen coused in the selected quarter
+        Generates String with the details for the chosen course in the selected quarter
        :param quartile: int that shows the quartile
        :return: string for this quartile
        """

@@ -12,7 +12,7 @@ def create_course(courseinfo):
     newcourse.add_required_courses(courseinfo['voorkennisverplicht'])
     newcourse.add_desired_courses(courseinfo['voorkennisgewenst'])
     newcourse.add_exams(courseinfo['tentamens'])
-    newcourse.add_exams_quartile(courseinfo['tentamens'])
+    newcourse.add_exams_quartile(courseinfo['tentamens']) # added to be able to quickly select quartiles
     return newcourse
 
 # functions for lists of courses
@@ -30,7 +30,7 @@ def available(courses, done):
 
 def available_required_satisfied(courses, done):
     """Select courses that have completed courses
-       as required knowledge or no required knowledge condition
+       as required knowledge or no prior required knowledge condition
        (empty list)
     """
     reqprior_lst = [course for course in courses if all(req_course in done for req_course in course.required_courses)]
@@ -57,7 +57,7 @@ def req_codes(courses, done):
     """""
        select required courses which are not done yet
     """
-    req_codes = [code for course in courses for code in course.required_courses_courses if code not in done]
+    req_codes = [code for course in courses for code in course.required_courses if code not in done]
     return req_codes
 
 
