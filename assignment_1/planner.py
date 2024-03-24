@@ -25,10 +25,15 @@ class Planner:
         """
 
         available_courses = course.available(self.prep.available_courses, self.prep.done_codes)
+        #self.print_courselist(available_courses)
         done_codes = self.prep.done_codes
+        #self.print_courselist(done_codes)
         available_req_stfd = course.available_required_satisfied(available_courses, done_codes)
+        #self.print_courselist(available_req_stfd)
         self.fxd_courses = course.fxd_crses(available_req_stfd)
+        #self.print_courselist(self.fxd_courses)
         self.var_courses = course.var_crses(available_req_stfd)
+        #self.print_courselist(self.var_courses)
         lst = [self.fxd_courses, self.var_courses]
         return lst
 
@@ -90,7 +95,10 @@ class Planner:
         self.crse = 'kwartiel {0} \n voorkennis: {1} \n Te volgen cursus: \n'.format(quartile, self.prep.done_codes)
         self.choose_course(quartile)
         if self.course_selected:
-            cde = self.course_selected.code
+            if isinstance(self.course_selected, list):
+                cde = self.course_selected[0].code
+            else:
+                cde = self.course_selected.code
             self.crse += self.course_selected.__str__()
             self.prep.done_codes.add(cde)
         else:
@@ -107,5 +115,15 @@ class Planner:
         course_list = []
         for quartile in range(1, 5):
             self.generate_for_quartile(quartile)
-            course_list.append(self.crse)
-        return course_list
+            print(self.crse + '\n')
+
+
+    def print_courselist(self,courselist):
+        """
+        Help function to print courselists
+        :param: courselist
+        """
+        text =''
+        for c in courselist:
+            text += c.code +" - "
+        print(text)

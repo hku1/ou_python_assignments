@@ -15,7 +15,6 @@ def create_course(courseinfo):
     newcourse.add_exams_quartile(courseinfo['tentamens'])
     return newcourse
 
-
 # functions for lists of courses
 
 def available(courses, done):
@@ -180,25 +179,25 @@ class Course:
             self.examsq.append(Start_and_enddate(exam).quartile())
         return self.examsq
 
-    # def __str__(self):
-    #     """ string with:
-    #     - code,
-    #     - title,
-    #     - period,
-    #     - new line
-    #     - codes of required foreknowledge or 'geen verplichte voorkennis'
-    #     - new line
-    #     - codes of desired foreknowledge or 'geen gewenste voorkennis'
-    #     - new line
-    #     """
-    #     if self.required_courses:
-    #         required_str = 'verplichte voorkennis: {0} '.format(self.required_courses)
-    #     else:
-    #         required_str = 'geen verplichte voorkennis'
-    #
-    #     if self.desired_courses:
-    #         desired_str = 'gewenste voorkennis: {0} '.format(self.desired_courses)
-    #     else:
-    #         desired_str = 'geen gewenste voorkennis'
-    #
-    #     return '{0}, {1}, \n {2} \n {3} \n'.format(self.code, self.title, required_str, desired_str)
+    def __str__(self):
+        """ string with:
+        - code,
+        - title,
+        - period,
+        - new line
+        - codes of required foreknowledge or 'geen verplichte voorkennis'
+        - new line
+        - codes of desired foreknowledge or 'geen gewenste voorkennis'
+        - new line
+        """
+        if self.required_courses:
+            required_str = 'verplichte voorkennis: {0} '.format(self.required_courses)
+        else:
+            required_str = 'geen verplichte voorkennis'
+
+        if self.desired_courses:
+            desired_str = 'gewenste voorkennis: {0} '.format(self.desired_courses)
+        else:
+            desired_str = 'geen gewenste voorkennis'
+
+        return '{0}, {1}, \n {2} \n {3} \n'.format(self.code, self.title, required_str, desired_str)
